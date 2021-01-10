@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Profile{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<h2 id="welcome-header">Welcome {{ user.name }}!</h2>
+
+<h2 id="user-balance">Your balance is {{ user.balance }}!</h2>
+
+
+<h2 >Here are all available tickets</h2>
+
+<div id="tickets">
+  <table style="width:100%">
+    <tr>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Expiration</th>
+      <th>Seller Email</th>
+    </tr>
+  {% for ticket in tickets %}
+    <tr>
+      <td>{{ ticket.name }}</td> 
+      <td>{{ ticket.quantity }}</td> 
+      <td>{{ ticket.price }}</td> 
+      <td>{{ ticket.expirationDate }}</td>
+      <td>{{ ticket.seller_email }}</td> 
+    </tr>
+  {% endfor %}
+  </table>
+</div>
+
+
+{% block sell %}
+<h1>{% block sell_title %}Sell Ticket{% endblock %}</h1>
+<h4 id='sell_message'>{{sell_message}}</h4>
+<form id="sell" action="/sell" method="post">
+  <div class="form-group">
+    <label for="sell-name">Name</label>
+    <input class="form-control" name="sell-name" id="sell-name" required>
+    <label for="sell-quantity">Quantity</label>
+    <input class="form-control" type="number" name="sell-quantity" id="sell-quantity" required>
+    <label for="sell-price">Price</label>
+    <input class="form-control" type="number" name="sell-price" id="sell-price" required>
+    <label for="sell-expirationDate">Expiration Date</label>
+    <input class="form-control" type="number" name="sell-expirationDate" id="sell-expirationDate" required>
+    <label for="sell-email">Email</label>
+    <input class="form-control" type="email" name="sell-email" id="sell-email" required>
+    <input class="btn btn-lg btn-primary" type="submit" id="submit-sell" value="Submit">
+  </div>
+</form>
+{% endblock %}
+
+
+{% block buy %}
+<h1>{% block buy_title %}Buy Ticket{% endblock %}</h1>
+<h4 id='buy_message'>{{buy_message}}</h4>
+<form id="buy" action="/buy" method="post">
+  <div class="form-group">
+    <label for="buy-name">Name</label>
+    <input class="form-control" name="buy-name" id="buy-name" required>
+    <label for="buy-quantity">Quantity</label>
+    <input class="form-control" type="number" name="buy-quantity" id="buy-quantity" required>
+    <input class="btn btn-lg btn-primary" type="submit" id="submit-buy" value="Submit">
+  </div>
+</form>
+{% endblock %}
+
+
+{% block update %}
+<h1>{% block update_title %}Update Ticket{% endblock %}</h1>
+<h4 id='update_message'>{{update_message}}</h4>
+<form id="update" action="/update" method="post">
+  <div class="form-group">
+    <label for="update-name">Name</label>
+    <input class="form-control" name="update-name" id="update-name" required>
+    <label for="update-quantity">Quantity</label>
+    <input class="form-control" type="number" name="update-quantity" id="update-quantity" required>
+    <label for="update-price">Price</label>
+    <input class="form-control" type="number" name="update-price" id="update-price" required>
+    <label for="update-expirationDate">Expiration Date</label>
+    <input class="form-control" type="number" name="update-expirationDate" id="update-expirationDate" required>
+    <label for="update-email">Email</label>
+    <input class="form-control" type="email" name="update-email" id="update-email" required>
+    <input class="btn btn-lg btn-primary" type="submit" id="submit-update" value="Submit">
+  </div>
+</form>    
+{% endblock %}
+
+
+<a href='/logout'>logout</a>
+{% endblock %}
